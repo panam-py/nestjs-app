@@ -1,3 +1,5 @@
+scalar Upload
+
 type User {
     id: ID!,
     email: String!,
@@ -25,7 +27,12 @@ type Query {
     users: [User!]!
 }
 
+input FileUploadInput {
+    file: Upload!
+}
+
 type Mutation {
     signup(signUpInput: SignUpInput): AuthPayload!
     login(loginInput: LoginInput): AuthPayload
+    uploadPic(fileUploadInput: FileUploadInput): Boolean
 }

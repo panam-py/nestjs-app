@@ -17,6 +17,10 @@ export class LoginInput {
     password: string;
 }
 
+export class FileUploadInput {
+    file: Upload;
+}
+
 export class User {
     id: string;
     email: string;
@@ -39,6 +43,9 @@ export abstract class IMutation {
     abstract signup(signUpInput?: Nullable<SignUpInput>): AuthPayload | Promise<AuthPayload>;
 
     abstract login(loginInput?: Nullable<LoginInput>): Nullable<AuthPayload> | Promise<Nullable<AuthPayload>>;
+
+    abstract uploadPic(fileUploadInput?: Nullable<FileUploadInput>): Nullable<boolean> | Promise<Nullable<boolean>>;
 }
 
+export type Upload = any;
 type Nullable<T> = T | null;

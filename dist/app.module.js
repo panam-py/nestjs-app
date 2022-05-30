@@ -14,6 +14,8 @@ const graphql_options_1 = require("./graphql.options");
 const prisma_module_1 = require("./prisma/prisma.module");
 const auth_module_1 = require("./auth/auth.module");
 const core_1 = require("@nestjs/core");
+const user_module_1 = require("./user/user.module");
+const aws_module_1 = require("./aws/aws.module");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
@@ -25,6 +27,8 @@ AppModule = __decorate([
             }),
             prisma_module_1.PrismaModule,
             auth_module_1.AuthModule,
+            user_module_1.UserModule,
+            aws_module_1.AwsModule,
         ],
         controllers: [],
         providers: [

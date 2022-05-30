@@ -37,6 +37,8 @@ export class AuthResolver {
         const jwt = this.jwt.sign({id: user.id});
         res.cookie('token', jwt, {httpOnly: true});
 
+        console.log(user)
+
         return user;
     }
 
