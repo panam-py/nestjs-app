@@ -1,0 +1,31 @@
+type User {
+    id: ID!,
+    email: String!,
+    password: String!
+    profilePic: String
+}
+
+input SignUpInput {
+    email: String!
+    password: String!
+}
+
+input LoginInput {
+    email: String!
+    password: String!
+}
+
+type AuthPayload {
+    id: ID!
+    email: String!
+}
+
+type Query {
+    user(id: Int!): User!
+    users: [User!]!
+}
+
+type Mutation {
+    signup(signUpInput: SignUpInput): AuthPayload!
+    login(loginInput: LoginInput): AuthPayload
+}
