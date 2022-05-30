@@ -1,2 +1,2 @@
-export declare const ResGql: (...dataOrPipes: any[]) => ParameterDecorator;
-export declare const GqlUser: (...dataOrPipes: any[]) => ParameterDecorator;
+export declare const ResGql: (...dataOrPipes: unknown[]) => ParameterDecorator;
+export declare const GqlUser: (...dataOrPipes: unknown[]) => ParameterDecorator;

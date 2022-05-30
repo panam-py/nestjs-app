@@ -10,7 +10,7 @@ import { APP_PIPE } from '@nestjs/core'
   imports: [
     GraphQLModule.forRootAsync({
       useClass: GraphqlOptions,
-      driver: ApolloDriver
+      driver: ApolloDriver,
     }),
     PrismaModule,
     AuthModule,

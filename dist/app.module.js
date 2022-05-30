@@ -21,7 +21,7 @@ AppModule = __decorate([
         imports: [
             graphql_1.GraphQLModule.forRootAsync({
                 useClass: graphql_options_1.GraphqlOptions,
-                driver: apollo_1.ApolloDriver
+                driver: apollo_1.ApolloDriver,
             }),
             prisma_module_1.PrismaModule,
             auth_module_1.AuthModule,
