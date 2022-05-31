@@ -18,6 +18,7 @@ export declare class User {
 export declare class AuthPayload {
     id: string;
     email: string;
+    profilePic?: Nullable<string>;
 }
 export declare abstract class IQuery {
     abstract user(id: number): User | Promise<User>;

@@ -31,6 +31,7 @@ export class User {
 export class AuthPayload {
     id: string;
     email: string;
+    profilePic?: Nullable<string>;
 }
 
 export abstract class IQuery {

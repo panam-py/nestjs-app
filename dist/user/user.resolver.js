@@ -18,37 +18,33 @@ const graphql_1 = require("@nestjs/graphql");
 const prisma_service_1 = require("../prisma/prisma.service");
 const GraphQLUpload_js_1 = require("graphql-upload/GraphQLUpload.js");
 const Upload_js_1 = require("graphql-upload/Upload.js");
-const aws_service_1 = require("../aws/aws.service");
 const common_1 = require("@nestjs/common");
 const graphql_auth_guard_1 = require("../auth/graphql-auth.guard");
 const decorators_1 = require("../shared/decorators/decorators");
+const fs_1 = require("fs");
 let UserResolver = class UserResolver {
-    constructor(prisma, awsService) {
+    constructor(prisma) {
         this.prisma = prisma;
-        this.awsService = awsService;
     }
-    async uploadPic(file, user) {
-        try {
-            const awsResponse = await this.awsService.uploadFile(file);
-            this.prisma.client.user.update({
-                where: {
-                    id: user.id
-                },
-                data: {
-                    profilePicture: awsResponse.Location
-                }
-            });
-            console.log(awsResponse);
-            return true;
-        }
-        catch (err) {
-            console.log(err);
-            return false;
-        }
+    async uploadPic({ createReadStream, filename }, user) {
+        return new Promise(async (resolve, reject) => {
+            const name = `${filename}-${user.id}-${Date.now()}`;
+            createReadStream().pipe((0, fs_1.createWriteStream)(`../uploads/${name}`)).on('finish', async () => {
+                await this.prisma.client.user.update({
+                    where: {
+                        id: user.id
+                    },
+                    data: {
+                        profilePicture: name
+                    }
+                });
+                resolve(true);
+            }).on('error', () => reject(false));
+        });
     }
 };
 __decorate([
-    (0, graphql_1.Mutation)(() => Boolean, { name: 'uploadPic' }),
+    (0, graphql_1.Mutation)(() => Boolean),
     (0, common_1.UseGuards)(graphql_auth_guard_1.GqlAuthGuard),
     __param(0, (0, graphql_1.Args)('file', { type: () => GraphQLUpload_js_1.default })),
     __param(1, (0, decorators_1.GqlUser)()),
@@ -58,7 +54,7 @@ __decorate([
 ], UserResolver.prototype, "uploadPic", null);
 UserResolver = __decorate([
     (0, graphql_1.Resolver)('User'),
-    __metadata("design:paramtypes", [prisma_service_1.PrismaService, aws_service_1.AWSService])
+    __metadata("design:paramtypes", [prisma_service_1.PrismaService])
 ], UserResolver);
 exports.UserResolver = UserResolver;
 //# sourceMappingURL=user.resolver.js.map

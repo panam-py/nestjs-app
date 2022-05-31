@@ -58,7 +58,7 @@ let AuthResolver = class AuthResolver {
                 email: signUpInputDto.email,
                 password,
                 profilePicture: '',
-                createdAt: new Date()
+                createdAt: new Date(Date.now())
             }
         });
         const jwt = this.jwt.sign({ id: user.id });

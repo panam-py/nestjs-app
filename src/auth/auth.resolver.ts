@@ -64,7 +64,7 @@ export class AuthResolver {
                 email: signUpInputDto.email,
                 password,
                 profilePicture: '',
-                createdAt: new Date()
+                createdAt: new Date(Date.now())
             }
         })
 

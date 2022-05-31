@@ -1,12 +1,12 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import * as cookieParser from 'cookie-parser';
-// import graphqlUploadExpress from 'graphql-upload/graphqlUploadExpress';
+import graphqlUploadExpress from 'graphql-upload/graphqlUploadExpress';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  app.use(cookieParser())
-  // app.use(graphqlUploadExpress({maxFileSize: 1000000, maxFiles:10}));
+  app.use(graphqlUploadExpress({ maxFileSize: 10000000, maxFiles: 10 }));
+  app.use(cookieParser());
   await app.listen(3000);
 }
 bootstrap();
